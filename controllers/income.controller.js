@@ -120,16 +120,23 @@ exports.delete = (req,res) =>{
         })
 }
 
-exports.getMonthlyTotalIncome = (req,res) => {
+exports.getMonthlyTotalIncome = async(req,res) => {
 
     const user_id = req.params.user_id;
-
-    Income.findAll({
-	
+    const startdate = req.body.startdate;
+    const enddate = req.body.enddate;
+    console.log(startdate)
+    console.log(enddate)
+    await Income.findAll({
         attributes: [[sequelize.fn('sum', sequelize.col('amount')), 'total']],
         raw: true,
         order: sequelize.literal('total DESC'),
-        where: { user_id : user_id }
+        where: {
+             user_id : user_id,
+             date : {
+                    [Op.between]: [ startdate , enddate ]
+             }
+             }
     
     }).then(data=>{
 
@@ -144,26 +151,3 @@ exports.getMonthlyTotalIncome = (req,res) => {
 
 
 }
-
-
-// exports.getMonthlyTotalIncome = (req,res) => {
-
-//     const user_id = req.params.user_id;
-//     Income.sum('amount', { 
-//         where: { user_id : user_id } 
-//     }) 
-//    .then(data=>{
-
-//         res.send(data)
-//    })
-//    .catch(err=>{
-
-//         console.log(err)
-//         res.status(500).send({
-//             messege:
-//             err.messege || `Some Error Occured`
-//         })
-        
-
-//    })
-// }
