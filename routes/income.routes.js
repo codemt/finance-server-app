@@ -10,8 +10,11 @@ module.exports = function(app) {
         next();
       });
 
-      app.post("/api/income/all/:user_id",controller.displayIncome);
-      app.post('/api/income/create',controller.create);
+      app.get("/api/income/all/:user_id",controller.findAll);
+      app.post("/api/income/create",controller.create);
+      app.get("/api/income/:id",controller.findOne);
+      app.put("/api/income/:id",controller.update);
+      app.delete("/api/income/:id",controller.delete);
 
 
 
