@@ -15,6 +15,7 @@ module.exports = function(app) {
       app.get("/api/income/:id",controller.findOne);
       app.put("/api/income/:id",controller.update);
       app.delete("/api/income/:id",controller.delete);
+      app.get("/api/income/total/:user_id",controller.getMonthlyTotalIncome);
 
 
 

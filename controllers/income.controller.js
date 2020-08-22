@@ -1,5 +1,6 @@
 const db = require('../models')
 const Op = db.Sequelize.Op
+const sequelize = require('sequelize')
 const Income = db.income
 
 exports.findAll = (req,res) =>{
@@ -8,21 +9,14 @@ exports.findAll = (req,res) =>{
   
       Income.findAll({ where : { user_id : user_id }})
       .then(data => {
-  
           res.send(data)
-  
       })
       .catch(err =>{
-  
           res.send(500).send({
-  
                   messege: 
                   err.messege || "Some error occured"
           })
-  
       })
-  
-  
   }
 
 exports.create = (req,res) => {
@@ -125,3 +119,51 @@ exports.delete = (req,res) =>{
             })
         })
 }
+
+exports.getMonthlyTotalIncome = (req,res) => {
+
+    const user_id = req.params.user_id;
+
+    Income.findAll({
+	
+        attributes: [[sequelize.fn('sum', sequelize.col('amount')), 'total']],
+        raw: true,
+        order: sequelize.literal('total DESC'),
+        where: { user_id : user_id }
+    
+    }).then(data=>{
+
+        res.send(data)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Some Error Occured')
+    })
+
+
+
+
+}
+
+
+// exports.getMonthlyTotalIncome = (req,res) => {
+
+//     const user_id = req.params.user_id;
+//     Income.sum('amount', { 
+//         where: { user_id : user_id } 
+//     }) 
+//    .then(data=>{
+
+//         res.send(data)
+//    })
+//    .catch(err=>{
+
+//         console.log(err)
+//         res.status(500).send({
+//             messege:
+//             err.messege || `Some Error Occured`
+//         })
+        
+
+//    })
+// }
