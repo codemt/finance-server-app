@@ -35,6 +35,9 @@ function initial(){
 initial()
 db.sequelize.sync()
 
+require('./routes/auth.routes')(app);
+require('./routes/income.routes')(app);
+
 
 app.get('/',(req,res)=>{
 
