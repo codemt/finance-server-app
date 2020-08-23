@@ -21,7 +21,7 @@ exports.findAll = (req,res) =>{
 
 exports.create = (req,res) => {
 
-    if(!req.body.income_head){
+    if(!req.body.expense_head){
 
         res.status(400).send({
 
@@ -29,15 +29,15 @@ exports.create = (req,res) => {
         })
         return;
     }
-    const Expense = {
+    const expense = {
 
-        expense_head: req.body.income_head,
+        expense_head: req.body.expense_head,
         amount: req.body.amount,
         date:req.body.date,
         user_id: req.body.user_id
     }
 
-    Expense.create(income)
+    Expense.create(expense)
     .then(data => {
 
         res.send(data)
@@ -81,7 +81,7 @@ exports.update = (req,res) =>{
     .then(num =>{
         if(num == 1 ){
             res.send({
-                messege: 'Your Income was Updated Succesfully '
+                messege: 'Your Expense was Updated Succesfully '
             })
         }
     })
