@@ -26,6 +26,8 @@ db.sequelize = sequelize
 db.user = require('./user.model.js')(sequelize,Sequelize)
 db.role = require('./role.model.js')(sequelize,Sequelize)
 db.income = require('./income.model')(sequelize,Sequelize)
+db.expense = require('./expense.model')(sequelize,Sequelize)
+
 db.role.belongsToMany(db.user,{
 
     through:"user_roles",
@@ -41,6 +43,7 @@ db.user.belongsToMany(db.role,{
 })
 
 db.income.belongsTo(db.user,{ foreignKey:'user_id'})
+db.expense.belongsTo(db.user,{ foreignKey:'user_id'})
 db.roles = ['user','admin','moderator']
 
 module.exports = db
