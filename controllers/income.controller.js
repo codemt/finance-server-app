@@ -141,7 +141,6 @@ exports.getMonthlyTotalIncome = async(req,res) => {
              }
     
     }).then(data=>{
-
         res.send(data)
     })
     .catch(err=>{
@@ -149,6 +148,30 @@ exports.getMonthlyTotalIncome = async(req,res) => {
         res.send('Some Error Occured')
     })
 
+}
+
+exports.getMonthlyAllIncome = async(req,res) =>{
+
+
+    const user_id = req.params.user_id;
+    const startdate = req.body.startdate;
+    const enddate = req.body.enddate;
+
+    await Income.findAll({
+        where: {
+             user_id : user_id,
+             date : {
+                    [Op.between]: [ startdate , enddate ]
+             }
+             }
+    
+    }).then(data=>{
+        res.send(data)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Some Error Occured')
+    })
 
 
 
