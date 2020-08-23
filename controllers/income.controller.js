@@ -122,9 +122,11 @@ exports.delete = (req,res) =>{
 
 exports.getMonthlyTotalIncome = async(req,res) => {
 
+    
     const user_id = req.params.user_id;
     const startdate = req.body.startdate;
     const enddate = req.body.enddate;
+    console.log(req.body)
     console.log(startdate)
     console.log(enddate)
     await Income.findAll({
