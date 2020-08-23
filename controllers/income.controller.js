@@ -163,7 +163,7 @@ exports.getMonthlyAllIncome = async(req,res) =>{
              date : {
                     [Op.between]: [ startdate , enddate ]
              }
-             }
+        }
     
     }).then(data=>{
         res.send(data)
