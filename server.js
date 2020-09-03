@@ -38,7 +38,7 @@ db.sequelize.sync()
 require('./routes/auth.routes')(app);
 require('./routes/income.routes')(app);
 require('./routes/expense.routes')(app);
-
+require('./routes/todolist.routes')(app);
 
 app.get('/',(req,res)=>{
 
