@@ -1,4 +1,5 @@
 const controller = require('../controllers/income.controller')
+const analytics = require('../controllers/analytics.controller')
 
 module.exports = function(app) {
 
@@ -17,6 +18,9 @@ module.exports = function(app) {
       app.delete("/api/income/:id",controller.delete);
       app.post("/api/income/total/:user_id",controller.getMonthlyTotalIncome);
       app.post("/api/income/monthly/:user_id",controller.getMonthlyAllIncome);
+
+      //analytics
+      app.post("/api/income/analytics/:user_id",analytics.IncomeHeadTotals);
 
 
 

@@ -7,7 +7,7 @@ exports.create = (req,res) =>{
 
      // console.log(token)
     // validate request
-    if(!req.body.title){
+    if(!req.body.todo){
 
         res.status(400).send({
 
@@ -19,9 +19,8 @@ exports.create = (req,res) =>{
     // create tutorial
     const todolist = {
 
-        title: req.body.title,
         todo: req.body.todo,
-        done:req.body.done ? req.body.done : false,
+        completed:req.body.done ? req.body.done : false,
         user_id: req.body.user_id
     }
 
