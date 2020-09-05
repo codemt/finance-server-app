@@ -21,6 +21,8 @@ module.exports = function(app) {
 
       //analytics
       app.post("/api/income/analytics/:user_id",analytics.IncomeHeadTotals);
+      app.get("/api/income/analytics/:user_id",analytics.getIncomeHeads);
+      app.post("/api/income/analytics/monthly/:user_id",analytics.getMonthlyIncomeHeads);
 
 
 

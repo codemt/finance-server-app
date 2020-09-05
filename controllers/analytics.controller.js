@@ -4,6 +4,55 @@ const Op = db.Sequelize.Op
 const Income = db.income
 const Expense = db.expense
 
+exports.getMonthlyIncomeHeads = async(req,res) =>{
+
+    const user_id = req.params.user_id;
+    const startdate = req.body.startdate;
+    const enddate = req.body.enddate;
+
+        await Income.findAll({
+            attributes: ['income_head'],
+            raw: true,
+            where: {
+                user_id : user_id,
+                date : {
+                    [Op.between]: [ startdate , enddate ]
+                 }
+                }
+        }).then(data=>{
+            res.send(data)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.send('Some Error Occured')
+        })
+
+
+
+}
+
+exports.getIncomeHeads = async(req,res) =>{
+
+    const user_id = req.params.user_id;
+
+        await Income.findAll({
+            attributes: ['income_head'],
+            raw: true,
+            where: {
+                user_id : user_id,
+                }
+        }).then(data=>{
+            res.send(data)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.send('Some Error Occured')
+        })
+
+
+
+}
+
 exports.IncomeHeadTotals = async(req,res) => {
 
 
