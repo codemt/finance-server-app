@@ -64,7 +64,7 @@ exports.IncomeHeadTotals = async(req,res) => {
     console.log(startdate)
     console.log(enddate)
         await Income.findAll({
-            attributes: [[sequelize.fn('sum', sequelize.col('amount')), 'total']],
+            attributes: ['income_head',[sequelize.fn('sum', sequelize.col('amount')), 'total']],
             raw: true,
             order: sequelize.literal('total DESC'),
             where: {
@@ -83,7 +83,7 @@ exports.IncomeHeadTotals = async(req,res) => {
         })
 }
 
-exports.IncomeHeadTotals = async(req,res) => {
+exports.ExpenseHeadTotals = async(req,res) => {
 
 
     const user_id = req.params.user_id;
