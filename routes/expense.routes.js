@@ -1,5 +1,5 @@
 const controller = require('../controllers/expense.controller')
-
+const analytics = require('../controllers/analytics.controller')
 module.exports = function(app) {
 
     app.use(function(req, res, next) {
@@ -18,6 +18,9 @@ module.exports = function(app) {
       app.post("/api/expense/total/:user_id",controller.getMonthlyTotalExpense);
       app.post("/api/expense/monthly/:user_id",controller.getMonthlyAllExpense);
 
-
+      //analytics
+      app.post("/api/expense/analytics/:user_id",analytics.ExpenseHeadTotals);
+      app.get("/api/expense/analytics/:user_id",analytics.getExpenseHeads);
+      app.post("/api/expense/analytics/monthly/:user_id",analytics.getMonthlyExpenseHeads);
 
 }
