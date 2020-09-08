@@ -20,6 +20,7 @@ exports.create = (req,res) =>{
     const todolist = {
 
         todo: req.body.todo,
+        category:req.body.category,
         completed:req.body.done ? req.body.done : false,
         user_id: req.body.user_id
     }
@@ -169,5 +170,47 @@ exports.delete = (req,res) =>{
 
 
     })
+
+}
+exports.getCategoryWise = async(req,res) =>{
+    
+    let user_id = req.params.id;
+    let category = req.params.category;
+
+    await Todolist.findAll({
+        raw: true,
+        where: {
+            user_id : user_id,
+            category: category
+            }
+    }).then(data=>{
+        res.send(data)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Some Error Occured')
+    })
+
+
+}
+
+exports.getAllCategories = async(req,res) =>{
+    
+    let user_id = req.params.id;
+
+    await Todolist.findAll({
+        attributes: ['id','category'],
+        raw: true,
+        where: {
+            user_id : user_id,
+            }
+    }).then(data=>{
+        res.send(data)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Some Error Occured')
+    })
+
 
 }

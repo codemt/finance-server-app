@@ -32,6 +32,14 @@ module.exports = function(app) {
       controller.delete
     )
 
+    // get all Categories
+    app.get("/api/todo/categories/:id",
+      controller.getAllCategories
+    )
+    app.get("/api/todo/:category/:id",
+    controller.getCategoryWise
+  )
+
 
   
    
