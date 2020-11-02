@@ -4,10 +4,8 @@ const cors = require('cors')
 var app = express()
 
 var corOptions = {
-
         origin:true
 }
-
 app.use(cors(corOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -42,7 +40,7 @@ require('./routes/todolist.routes')(app);
 
 app.get('/',(req,res)=>{
 
-        res.send('Welcome to Express Server')
+        res.send('Welcome to Morbius World Server')
 
 })
 

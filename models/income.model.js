@@ -4,7 +4,6 @@ module.exports = (sequelize,Sequelize) => {
         
         income_head:{
             type: Sequelize.STRING,
-
         },
         amount:{
             type:Sequelize.INTEGER,
