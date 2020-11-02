@@ -33,10 +33,15 @@ function initial(){
 initial()
 db.sequelize.sync()
 
+// total finance 
 require('./routes/auth.routes')(app);
 require('./routes/income.routes')(app);
 require('./routes/expense.routes')(app);
 require('./routes/todolist.routes')(app);
+
+// marketwatch
+require('./routes/mw_users.routes')(app);
+require('./routes/stocks_latest.routes')(app);
 
 app.get('/',(req,res)=>{
 

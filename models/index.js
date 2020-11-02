@@ -20,15 +20,22 @@ const sequelize = new Sequelize(
     }  
 );
 const db = {}
-
 db.Sequelize = Sequelize
 db.sequelize = sequelize
+
+// total finance
 db.user = require('./user.model.js')(sequelize,Sequelize)
 db.role = require('./role.model.js')(sequelize,Sequelize)
 db.income = require('./income.model')(sequelize,Sequelize)
 db.expense = require('./expense.model')(sequelize,Sequelize)
 db.todolist = require('./todolist.model.js')(sequelize,Sequelize)
 
+// marketwatch 
+db.mw_users = require('./mw_users.model')(sequelize,Sequelize)
+db.stocks_latest = require('./stocks_latest.model.js')(sequelize,Sequelize)
+
+
+//total finance
 db.role.belongsToMany(db.user,{
 
     through:"user_roles",
@@ -42,11 +49,13 @@ db.user.belongsToMany(db.role,{
     otherKey:"role_id"
 
 })
-
 db.income.belongsTo(db.user,{ foreignKey:'user_id'})
 db.expense.belongsTo(db.user,{ foreignKey:'user_id'})
 db.todolist.belongsTo(db.user,{ foreignKey:'user_id'})
-
 db.roles = ['user','admin','moderator']
+
+
+// marketwatch
+db.stocks_latest.belongsTo(db.mw_users,{ foreignKey:'google_id'})
 
 module.exports = db
