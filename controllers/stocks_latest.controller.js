@@ -52,6 +52,7 @@ exports.save = (req,res) =>{
     // console.log(token)
     
     const stock_name = req.body.stock_name
+    const google_id = req.body.user_id
    if(!req.body.stock_name || !req.body.close_price || !req.body.open_price || !req.body.stock_name || !req.body.low_price || !req.body.high_price || !req.body.date || !req.body.user_id){
 
        res.status(400).send({
@@ -75,8 +76,9 @@ exports.save = (req,res) =>{
    console.log(stock_data)
 
 
+
    function isStockUnique(stock_name) {
-    return Stocks_Latest.count({ where: { stock_name: stock_name } })
+    return Stocks_Latest.count({ where: { stock_name: stock_name,google_id : google_id } })
       .then(count => {
         if (count != 0) {
           return false;
