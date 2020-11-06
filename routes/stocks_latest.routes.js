@@ -8,22 +8,28 @@ module.exports = function(app) {
       );
       next();
     });
-  
-  
+
     // get all stocks
     app.get("/api/stocks/all",
         controller.findAll
     )
-
     // get stocks by user
     app.get("/api/stocks/:id",
     controller.findUserStocks
-)
-
-
+  )
+    // add stocks 
     app.post("/api/stocks/add",
     controller.save
     )
+    // update stocks
+    app.post("/api/stocks/update/:stock_name",
+    controller.update
+    )
+    // delete stocks
+    app.delete("/api/stocks/:id",
+      controller.delete
+    )
+
 
   
    
