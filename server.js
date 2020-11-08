@@ -34,6 +34,7 @@ initial()
 db.sequelize.sync()
 
 // total finance 
+require('./routes/tf_users.routes')(app);
 require('./routes/auth.routes')(app);
 require('./routes/income.routes')(app);
 require('./routes/expense.routes')(app);

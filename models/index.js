@@ -24,6 +24,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 // total finance
+db.tf_users = require('./tf_users.model')(sequelize,Sequelize)
 db.user = require('./user.model.js')(sequelize,Sequelize)
 db.role = require('./role.model.js')(sequelize,Sequelize)
 db.income = require('./income.model')(sequelize,Sequelize)
@@ -33,7 +34,7 @@ db.todolist = require('./todolist.model.js')(sequelize,Sequelize)
 // marketwatch 
 db.mw_users = require('./mw_users.model')(sequelize,Sequelize)
 db.stocks_latest = require('./stocks_latest.model.js')(sequelize,Sequelize)
-
+    
 
 //total finance
 db.role.belongsToMany(db.user,{
@@ -49,9 +50,9 @@ db.user.belongsToMany(db.role,{
     otherKey:"role_id"
 
 })
-db.income.belongsTo(db.user,{ foreignKey:'user_id'})
-db.expense.belongsTo(db.user,{ foreignKey:'user_id'})
-db.todolist.belongsTo(db.user,{ foreignKey:'user_id'})
+db.income.belongsTo(db.tf_users,{ foreignKey:'user_id'})
+db.expense.belongsTo(db.tf_users,{ foreignKey:'user_id'})
+db.todolist.belongsTo(db.tf_users,{ foreignKey:'user_id'})
 db.roles = ['user','admin','moderator']
 
 
