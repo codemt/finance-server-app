@@ -46,7 +46,7 @@ require('./routes/stocks_latest.routes')(app);
 
 app.get('/',(req,res)=>{
 
-        res.send('Welcome to Morbius World Server')
+        res.send('Welcome to Morbius World Server Version 2.0')
 
 })
 
